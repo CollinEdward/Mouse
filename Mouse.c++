@@ -20,11 +20,11 @@ void cli(){
     cin >> command;
 
     if (command == "help"){
-        cout << "help - show this help" << endl;
+        cout << "\nhelp - show this help" << endl;
         cout << "exit - exit from program" << endl;
         cout << "d2ip - show ip of server" << endl;
         cout << "d2port - show port of server" << endl;
-        cout << "ip2d - show ip of client" << endl;
+        cout << "ip2d - show ip of client\n" << endl;
 
         cli();
 
@@ -66,12 +66,6 @@ void cli(){
         cout << "Open ports: " << system(("sudo nmap -sS " + domain).c_str()) << endl;
         
         cli();
-
-
-    } else if (command == ""){
-        
-
-    }
  
     } else {
         cout << "Unknown command" << endl;
@@ -102,6 +96,7 @@ void success(){
 
 
 void login(){
+    cout << "Please login to the system" << endl;
     // check if the file exists 
     ifstream file("login.txt");
     // check if username and password are correct 
@@ -118,8 +113,14 @@ void login(){
                 getline(file, line);
                 if(line == password){
                     success();
-                    break;
+                    
+                } else {
+                    cout << "Wrong password!\nTry again\n" << endl;
+                    login();
                 }
+            } else {
+                cout << "Wrong username!\nTry again\n" << endl;
+                login();
             }
         }
     }
@@ -169,7 +170,6 @@ void check(){
 
     ifstream file("login.txt");
     if(file.is_open()){
-        cout << "You are already registered!" << endl;
         login();
     }
     else{
