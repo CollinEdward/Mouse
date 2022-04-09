@@ -66,47 +66,9 @@ void cli(){
         cout << "Open ports: " << system(("sudo nmap -sS " + domain).c_str()) << endl;
         
         cli();
- 
-    } else if (command == "lg" || "local gateway") {
-        string answer;
-
-        cout << "This command automates the process of finding the local gateway.\nScanning for ports and vulnerabilities\nAnd giving basic information about the local network\nThis can trigger firewalls etc" << endl;
-        cout << "Do you want to continue? (y/n) ";
-        cin >> answer;
-        
-        if (answer == "y"){
-            string type;
-            cout << "types of scan: \n1. minimal scan\n medium scan\n full scan" << endl;
-            cout << "Enter type of scan: ";
-            cin >> type;
-            if (type == "minimal"){
-                cout << "Local gateway: " << system("ip r | grep default") << endl;
-                string local_gateway = "ip r | grep default";
-                cout << "Open ports: " << system("sudo nmap -sS -Pn") << local_gateway << endl;
-
-            } else if (type == "medium") {
-                cout << "Local gateway: " << system("ip r | grep default") << endl;
-                string local_gateway = "ip r | grep default";
-                cout << "Open ports: " << system("sudo nmap -sT --script=vuln -Pn") << local_gateway << endl;
-            
-            } else if (type == "full") {
-
-                cout << "Local gateway: " << system("ip r | grep default") << endl;
-                string local_gateway = "ip r | grep default";
-                cout << "Open ports: " << system("sudo nmap -sT -A --script=vuln -Pn ") << local_gateway << endl;
-            
-            } else {
-                cout << "Wrong type of scan" << endl;
-        
-            }
-
-        } else if (answer == "n") {
-            cli();
-    }
-
             
     } else {
-        cout << "Unknown command" << endl;
+        system(command.c_str());        
         cli();
     
     }        
